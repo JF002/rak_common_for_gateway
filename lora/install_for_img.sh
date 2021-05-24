@@ -56,11 +56,16 @@ cp ./update_gwid.sh rak2287/packet_forwarder/lora_pkt_fwd/update_gwid.sh
 cp ./start.sh  rak2287/packet_forwarder/lora_pkt_fwd/start.sh
 cp ./set_eui.sh  rak2287/packet_forwarder/lora_pkt_fwd/set_eui.sh
 
+cp ./update_gwid.sh pinedio/packet_forwarder/lora_pkt_fwd/update_gwid.sh
+cp ./start.sh  pinedio/packet_forwarder/lora_pkt_fwd/start.sh
+cp ./set_eui.sh  pinedio/packet_forwarder/lora_pkt_fwd/set_eui.sh
+
 cp rak7243 /usr/local/rak/lora/ -rf
 cp rak2246 /usr/local/rak/lora/ -rf
 cp rak2247_usb /usr/local/rak/lora/ -rf
 cp rak2247_spi /usr/local/rak/lora/ -rf
 cp rak2287 /usr/local/rak/lora/ -rf
+cp pinedio /usr/local/rak/lora/ -rf
 
 cp ttn-gateway.service /lib/systemd/system/ttn-gateway.service
 

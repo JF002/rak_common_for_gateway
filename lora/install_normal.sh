@@ -32,7 +32,7 @@ if [ "${RAK_GW_MODEL}" = "RAK2247" ]; then
 		LORA_DIR_TMP=rak2247_usb
 	fi
 	popd
-elif [ "${RAK_GW_MODEL}" = "RAK2287" ] || [ "${RAK_GW_MODEL}" = "RAK7248" ] ; then
+elif [ "${RAK_GW_MODEL}" = "RAK2287" ] || [ "${RAK_GW_MODEL}" = "RAK7248" ]; then
 	pushd rak2287
 	if [ "${LORA_SPI}" = "1" ]; then
 		if [ "${INSTALL_LTE}" = "1" ]; then
@@ -45,6 +45,20 @@ elif [ "${RAK_GW_MODEL}" = "RAK2287" ] || [ "${RAK_GW_MODEL}" = "RAK7248" ] ; th
 	fi
 	./install.sh
 	LORA_DIR_TMP=rak2287
+	popd
+elif [ "$RAK_GW_MODEL" = "PINEDIO" ]; then
+	pushd pinedio
+	if [ "${LORA_SPI}" = "1" ]; then
+		if [ "${INSTALL_LTE}" = "1" ]; then
+			cp global_conf_i2c global_conf -rf
+		else
+			cp global_conf_uart global_conf -rf
+		fi
+	else
+		cp global_conf_usb global_conf -rf
+	fi
+	./install.sh
+	LORA_DIR_TMP=pinedio
 	popd
 elif [ "${RAK_GW_MODEL}" = "RAK7243" ] || [ "${RAK_GW_MODEL}" = "RAK7244" ]; then
 	pushd rak7243
@@ -85,7 +99,8 @@ cp /opt/ttn-gateway/packet_forwarder/lora_pkt_fwd/global_conf/global_conf.eu_863
 	/opt/ttn-gateway/packet_forwarder/lora_pkt_fwd/global_conf.json
 	
 rpi_model=`do_get_rpi_model`
-if [ $rpi_model -eq 3 ] || [ $rpi_model -eq 4 ]; then
+pinedio_model=`do_get_pinedio_model`
+if [ $rpi_model -eq 3 ] || [ $rpi_model -eq 4 ] || [ $pinedio_model -eq 0 ]; then
     sed -i "s/^.*server_address.*$/\t\"server_address\": \"127.0.0.1\",/" \
 	/opt/ttn-gateway/packet_forwarder/lora_pkt_fwd/global_conf.json
 fi

@@ -23,7 +23,7 @@ elif [ "${RAK_MODEL}" = "RAK7243" ] || [ "${RAK_MODEL}" = "RAK7244" ]; then
 	else
 		GW_MODEL_STR="${RAK_MODEL} no LTE"
 	fi
-elif [ "${RAK_MODEL}" = "RAK7248" ] || [ "${RAK_MODEL}" = "RAK2287" ]; then
+elif [ "${RAK_MODEL}" = "RAK7248" ] || [ "${RAK_MODEL}" = "RAK2287" ] || [ "$RAK_MODEL" = "PINEDIO" ]; then
 	if [ "${LORA_SPI}" = "1" ]; then
 		if [ "$INSTALL_LTE" = "1" ]; then
 			GW_MODEL_STR="${RAK_MODEL} with LTE"

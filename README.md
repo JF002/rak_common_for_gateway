@@ -18,6 +18,7 @@ This project currently provides support for the below platforms.
 * RAK2246
 * RAK7248 no LTE (RAK2287 + raspberry pi)
 * RAK7248 with LTE (RAK2287 + LTE + raspberry pi)
+* Pine64 PineDio Gateway
 
 ##	Changelog
 2021-03-09 V4.2.8
@@ -120,7 +121,9 @@ step4 : Next you will see some messages as follow. Please select the correspondi
       *	 7.RAK7248 no LTE (RAK2287 SPI + raspberry pi)
       *	 8.RAK7248 with LTE (RAK2287 SPI + LTE + raspberry pi)
 	  *	 9.RAK2287 USB
-      Please enter 1-9 to select the model:
+	  *	 10. Pine64 PineDio Gateway
+
+      Please enter 1-10 to select the model:
 
 step5 : Wait a moment and the installation is complete.
 

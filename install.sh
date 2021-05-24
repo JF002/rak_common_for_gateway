@@ -24,6 +24,7 @@ print_help()
 }
 
 rpi_model=`do_get_rpi_model`
+pinedio_model=`do_get_pinedio_model`
 
 ARGS=`getopt -o "" -l "help,img,chirpstack:" -- "$@"`
 
@@ -57,7 +58,7 @@ while true; do
                 exit
             fi
 
-            if [ $rpi_model -ne 3 ] && [ $rpi_model -ne 4 ]; then
+            if [ $rpi_model -ne 3 ] && [ $rpi_model -ne 4 ] && [ $pinedio_model -ne 0 ]; then
                 INSTALL_CHIRPSTACK=0
             fi
             shift;

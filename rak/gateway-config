@@ -8,6 +8,7 @@ GATEWAY_CONFIG_INFO=/usr/local/rak/gateway-config-info.json
 LORA_PKT_PATH=/opt/ttn-gateway/packet_forwarder/lora_pkt_fwd
 
 rpi_model=`do_get_rpi_model`
+pinedio_model=`do_get_pinedio_model`
 INSTALL_CHIRPSTACK=`do_get_gw_install_chirpstack`
 GW_MODEL=`do_get_gw_model`
 GW_VERSION=`do_get_gw_version`
@@ -172,7 +173,7 @@ do_set_lora_server_ip()
         rm /tmp/gate_server_ip
         write_json_lora_server_ip "$gate_server_ip"
         sed -i "s/^.*server_address.*$/\t\"server_address\": \"$gate_server_ip\",/" $LORA_PKT_PATH/global_conf.json
-        if [ $rpi_model -eq 3 ] || [ $rpi_model -eq 4 ]; then
+        if [ $rpi_model -eq 3 ] || [ $rpi_model -eq 4 ] || [ $pinedio_model -eq 0 ]; then
             do_check_ip_is_localhost $gate_server_ip
             RET=$?
             if  [ $RET -eq 0 ]; then
@@ -305,7 +306,7 @@ do_setup_LoRaServer_config()
 }
 
 do_setup_channel_plan() {
-    if [ $rpi_model -eq 3 ] || [ $rpi_model -eq 4 ]; then
+    if [ $rpi_model -eq 3 ] || [ $rpi_model -eq 4 ] || [ $pinedio_model -eq 0 ]; then
         default_item=`do_get_gateway_info lora_server.server_plan`
 
         FUN=$(dialog --title "Server-plan configuration" --default-item $default_item --menu "Select the Server-plan:" 15 60 3 \

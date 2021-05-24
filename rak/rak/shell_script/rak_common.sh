@@ -267,4 +267,12 @@ do_get_rpi_model()
     echo $model
 }
 
-
+do_get_pinedio_model()
+{
+  model=255
+  text=`tr -d '\0' </proc/device-tree/model | grep -a 'SoPine with baseboard'`
+  if [ ! -z "$text" ]; then
+      model=0
+  fi
+  echo $model
+}

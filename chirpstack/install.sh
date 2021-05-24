@@ -10,8 +10,9 @@ if [ $(id -u) -ne 0 ]; then
 fi
 
 rpi_model=`do_get_rpi_model`
-if [ $rpi_model -ne 3 ] && [ $rpi_model -ne 4 ]; then
-    echo_warn "ChirpStack is not support for this rpi model."
+pinedio_model=`do_get_pinedio_model`
+if [ $rpi_model -ne 3 ] && [ $rpi_model -ne 4 ] && [ $pinedio_model -ne 0 ]; then
+    echo_warn "ChirpStack is not support for this model."
     exit 0
 fi
 

@@ -1,8 +1,15 @@
 #! /bin/bash
 
+SCRIPT_COMMON_FILE=/usr/local/rak/shell_script/rak_common.sh
+source $SCRIPT_COMMON_FILE
+pinedio_model=`do_get_pinedio_model`
 
 # Reset iC880a PIN
-SX1301_RESET_BCM_PIN=17
+if [ $pinedio_model -eq 0 ]; then
+  SX1301_RESET_BCM_PIN=71
+else
+  SX1301_RESET_BCM_PIN=17
+fi
 echo "$SX1301_RESET_BCM_PIN"  > /sys/class/gpio/export
 echo "out" > /sys/class/gpio/gpio$SX1301_RESET_BCM_PIN/direction
 echo "0"   > /sys/class/gpio/gpio$SX1301_RESET_BCM_PIN/value

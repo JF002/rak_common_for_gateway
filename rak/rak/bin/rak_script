@@ -3,7 +3,11 @@
 SCRIPT_COMMON_FILE=/usr/local/rak/shell_script/rak_common.sh
 source $SCRIPT_COMMON_FILE
 
-systemctl stop serial-getty@ttyAMA0.service
+pinedio_model=`do_get_pinedio_model`
+
+if [ $pinedio_model -ne 0 ]; then
+  systemctl stop serial-getty@ttyAMA0.service
+fi
 
 /usr/local/rak/bin/rak_for_ttn.sh
 
@@ -20,8 +24,8 @@ fi
 # first boot, add gateway_id to loraserver
 if [ -f "/usr/local/rak/first_boot/init_loraserver_db" ]; then
         rpi_model=`do_get_rpi_model`
-        if [ $rpi_model -ne 3 ] && [ $rpi_model -ne 4 ]; then
-            echo_warn "ChirpStack is not support for this rpi model."
+        if [ $rpi_model -ne 3 ] && [ $rpi_model -ne 4 ] && [ $pinedio_model -ne 0 ]; then
+            echo_warn "ChirpStack is not support for this model."
             systemctl disable chirpstack-application-server
             systemctl disable chirpstack-gateway-bridge
             systemctl disable chirpstack-network-server

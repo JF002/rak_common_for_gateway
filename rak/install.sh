@@ -13,7 +13,10 @@ if [ $UID != 0 ]; then
     exit 1
 fi
 
-systemctl disable hciuart
+pinedio_model=`do_get_pinedio_model`
+if [ $pinedio_model -ne 0 ]; then
+  systemctl disable hciuart
+fi
 
 apt install git ppp dialog jq minicom monit i2c-tools -y
 
